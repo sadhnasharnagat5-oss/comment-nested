@@ -11,10 +11,11 @@
 
   <Section>
     <div>comment </div><br>
-    <app-comment 
-    *ngFor="let topComment of mockComments" 
-    [comment]="topComment">
-  </app-comment>
+<app-comment 
+  *ngFor="let topComment of mockComments" 
+  [comment]="topComment"
+  (replySubmitted)="onReplyReceived($event)">
+</app-comment>
     
   </Section>
  
