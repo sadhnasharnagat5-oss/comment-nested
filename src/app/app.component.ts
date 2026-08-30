@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
-import { SignalComponent } from './signal/signal.component';
 import { CommonModule } from '@angular/common'; // 1. Import CommonModule
 import { CommentComponent } from './comment/comment.component';
 import { ReplyPayload,Comment } from './comment.model';
@@ -9,7 +8,7 @@ import { ReplyPayload,Comment } from './comment.model';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SignalComponent, CommonModule,CommentComponent],
+  imports: [CommonModule,CommentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
