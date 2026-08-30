@@ -1,0 +1,30 @@
+<div class="comment-box">
+  <div class="comment-header">
+    <strong>{{ comment.author }}</strong>
+  </div>
+  <p class="comment-text">{{ comment.text }}</p>
+
+  <!-- 1. Reply Toggle Button -->
+  <button class="reply-btn" (click)="toggleReplyForm()">
+    {{ isReplying ? 'Cancel' : 'Reply' }}
+  </button>
+
+  <!-- 2. Conditional Reply Form (Mac-optimized Enter submission included) -->
+  <div class="reply-form" *ngIf="isReplying">
+    <textarea 
+      #replyInput
+      (keydown.enter)="submitReply(replyInput)"
+      placeholder="Write a reply... (Press Enter to send)">
+    </textarea>
+    <button class="send-btn" (click)="submitReply(replyInput)">Send</button>
+  </div>
+
+  <!-- 3. Recursive Loop (Crucial: note the event binding here) -->
+  <div class="comment-replies" *ngIf="comment.replies && comment.replies.length > 0">
+    <app-comment 
+      *ngFor="let reply of comment.replies" 
+      [comment]="reply"
+      (replySubmitted)="forwardReply($event)"> 
+    </app-comment>
+  </div>
+</div>

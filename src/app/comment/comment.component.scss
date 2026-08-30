@@ -1,0 +1,13 @@
+.comment-box {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.comment-replies {
+  margin-left: 24px; /* Indents child comments */
+  border-left: 2px solid #e0e0e0; /* Visual nesting line */
+  padding-left: 12px;
+  margin-top: 8px;
+}

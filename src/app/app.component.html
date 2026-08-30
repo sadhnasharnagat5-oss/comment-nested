@@ -1,0 +1,20 @@
+<!-- <app-signal></app-signal> -->
+
+<section>
+    <div>Add comment</div>
+    <textarea (keydown.enter)="onEnterPressed($event)" ></textarea>
+</section>
+ 
+
+ <br>
+ <hr>
+
+  <Section>
+    <div>comment </div><br>
+    <app-comment 
+    *ngFor="let topComment of mockComments" 
+    [comment]="topComment">
+  </app-comment>
+    
+  </Section>
+ 
