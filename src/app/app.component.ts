@@ -74,7 +74,7 @@ export class AppComponent {
 
   }
   onReplyReceived(payload: ReplyPayload): void {
-    console.log('Adding reply to parent ID:', payload);
+    // console.log('Adding reply to parent ID:', payload);
     
     const newReply: Comment = {
       id: Math.random().toString(), // Generate a unique ID
