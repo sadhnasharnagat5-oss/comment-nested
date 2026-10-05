@@ -12,11 +12,12 @@ import {
 import { forkJoin, of } from 'rxjs';
 import { error } from 'console';
 import { AutoSearchComponent } from './auto-search/auto-search.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AutoSearchComponent],
+  imports: [CommonModule, ReactiveFormsModule, AutoSearchComponent,PaginationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
