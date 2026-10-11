@@ -28,12 +28,9 @@ export class AutoSearchComponent {
         map((value) => value ?? ''),
         debounceTime(500),
         distinctUntilChanged(),
-        
       )
       .subscribe((results) => {
         this.searchEmit.emit(results)
-
-        // Handle your search results here
       });
   }
 
