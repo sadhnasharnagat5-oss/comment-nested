@@ -1,4 +1,4 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component, EventEmitter, inject, Inject, Output, output } from '@angular/core';
 import { UserService } from '../user.service';
 import {
   ɵInternalFormsSharedModule,
@@ -16,6 +16,7 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs';
   styleUrl: './auto-search.component.scss',
 })
 export class AutoSearchComponent {
+  @Output() searchEmit=new EventEmitter()
   private userService = inject(UserService);
 
   serachForm = new FormGroup({
@@ -27,10 +28,10 @@ export class AutoSearchComponent {
         map((value) => value ?? ''),
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((val: any) => this.userService.userSearch(val)),
+        
       )
       .subscribe((results) => {
-        console.log(results);
+        this.searchEmit.emit(results)
 
         // Handle your search results here
       });

@@ -27,4 +27,13 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {}
+  search(event:any){
+    console.log(event)
+    of(event).pipe(
+      switchMap((val:any)=>this.userService.userSearch(val))
+    ).subscribe((data)=>{
+      console.log(data)
+    })
+
+  }
 }
