@@ -5,13 +5,19 @@
         list-style: none;
         display: flex;
         padding: inherit;
+        
 
         .pagination-li{
             border: 1px solid black;
             padding: 2px;
             padding-left: 2px;
             padding-right: 2px;
+            cursor: pointer;
         }
+    }
+    .active{
+        background-color: black;
+        color: #fff;
     }
 
 }

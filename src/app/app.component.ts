@@ -24,7 +24,7 @@ import { AccordianComponent } from './accordian/accordian.component';
 })
 export class AppComponent implements OnInit {
   title = 'practice';
-  
+totalItem:any;
   items = [
     { title: 'What is Angular?', content: 'Angular is a platform and framework for building client-side applications in HTML and TypeScript.' },
     { title: 'What is an Accordion?', content: 'An accordion is a vertically stacked set of interactive headings that each contain a snippet of content.' },
@@ -33,14 +33,24 @@ export class AppComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit() {}
-  search(event:any){
+  ngOnInit() {
+    this.getPagination("")
+  }
+  // search(event:any){
+  //   console.log(event)
+  //   of(event).pipe(
+  //     switchMap((val:any)=>this.userService.userSearch(val))
+  //   ).subscribe((data)=>{
+  //     console.log(data)
+  //   })
+
+  // }
+
+  getPagination(event:any){
     console.log(event)
-    of(event).pipe(
-      switchMap((val:any)=>this.userService.userSearch(val))
-    ).subscribe((data)=>{
+    this.userService.getpagination(event).subscribe((data:any)=>{
+      this.totalItem=data.total;
       console.log(data)
     })
-
   }
 }

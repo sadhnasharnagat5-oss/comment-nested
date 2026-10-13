@@ -1,13 +1,12 @@
 <div class="pagination-container">
-    <button class="pagination-button">Prev</button>
-    <ul class="pagination-ul">
-        @for(pageno of page;track $index){
-            <li class="pagination-li">{{ pageno}}</li>
-        }
-        
-        
-    </ul>
-    <button class="pagination-button">
-        Next
-    </button>
+  <button class="pagination-button" (click)="clickPre()" [disabled]="this.currentPage<0">Prev</button>
+  <ul class="pagination-ul">
+    @for(pageno of page; track pageno; let i = $index) {
+      <li class="pagination-li" [class.active]="currentPage===i" (click)="onPageClick(i)">{{ pageno }}</li>
+    }
+  </ul>
+  <button class="pagination-button" (click)="clickNext()" [disabled]="this.currentPage>this.totalPageNumber">Next</button>
 </div>
+
+
+

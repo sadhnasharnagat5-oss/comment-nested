@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
  baseApiUrl="https://jsonplaceholder.typicode.com"
+ paganationURL='https://dummyjson.com/product/?'
   constructor(private http: HttpClient) { }
 
   getUserData() {
@@ -24,5 +25,18 @@ export class UserService {
   getComment(firstPostData:any){
     return this.http.get<Comment[]>(`${this.baseApiUrl}/comments?postId=${firstPostData.id}`);
       
+  }
+  
+
+  getpagination(data:any){
+    let params = new HttpParams();
+    Object.entries(data).forEach(([key, value]) => {
+  if (value !== null && value !== undefined) {
+    params = params.append(key, value.toString());
+  }
+});
+
+    return this.http.get<any>(`${this.paganationURL}${params}`);
+    
   }
 }
