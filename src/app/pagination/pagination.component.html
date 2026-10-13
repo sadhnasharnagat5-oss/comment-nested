@@ -1,1 +1,13 @@
-<p>pagination works!</p>
+<div class="pagination-container">
+    <button class="pagination-button">Prev</button>
+    <ul class="pagination-ul">
+        @for(pageno of page;track $index){
+            <li class="pagination-li">{{ pageno}}</li>
+        }
+        
+        
+    </ul>
+    <button class="pagination-button">
+        Next
+    </button>
+</div>

@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './pagination.component.scss'
 })
 export class PaginationComponent {
+  page=[1,2,3,4,5]
 
 }

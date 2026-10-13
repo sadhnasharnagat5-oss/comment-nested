@@ -1,0 +1,23 @@
+.accordion-item {
+    border: 1px solid #ddd;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    background: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.accordion-content {
+    padding: 12px 16px;
+    background: #fff;
+}

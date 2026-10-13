@@ -13,16 +13,23 @@ import { forkJoin, of } from 'rxjs';
 import { error } from 'console';
 import { AutoSearchComponent } from './auto-search/auto-search.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { AccordianComponent } from './accordian/accordian.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AutoSearchComponent,PaginationComponent],
+  imports: [CommonModule, ReactiveFormsModule, AutoSearchComponent,PaginationComponent,AccordianComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'practice';
+  
+  items = [
+    { title: 'What is Angular?', content: 'Angular is a platform and framework for building client-side applications in HTML and TypeScript.' },
+    { title: 'What is an Accordion?', content: 'An accordion is a vertically stacked set of interactive headings that each contain a snippet of content.' },
+    { title: 'How does machine coding work?', content: 'You write clean, modular code live, handling edge cases like state management and accessibility.' }
+  ];
 
   constructor(private userService: UserService) {}
 
