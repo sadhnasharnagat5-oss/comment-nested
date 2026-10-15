@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
@@ -15,6 +15,8 @@ import { error } from 'console';
 import { AutoSearchComponent } from './auto-search/auto-search.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { AccordianComponent } from './accordian/accordian.component';
+import { MultistepFormComponent } from './multistep-form/multistep-form.component';
+import { FileExplorerComponent } from './file-explorer/file-explorer.component';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +27,8 @@ import { AccordianComponent } from './accordian/accordian.component';
     AutoSearchComponent,
     PaginationComponent,
     AccordianComponent,
+    MultistepFormComponent,
+    FileExplorerComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -54,7 +58,7 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.getPagination('');
+    // this.getPagination('');
   }
 
   searchMemo(searchValue: any) {

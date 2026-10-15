@@ -1,0 +1,45 @@
+.node-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.node-item:hover {
+  background-color: #2a2d2e;
+}
+.node-item:hover .actions {
+  display: flex;
+}
+.name {
+  margin-left: 8px;
+  font-size: 13px;
+}
+.actions {
+  display: none;
+  margin-left: auto;
+  gap: 4px;
+}
+.actions button {
+  background: transparent;
+  border: none;
+  color: #858585;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.actions button:hover { color: #fff; }
+.delete-btn:hover { color: #f14c4c !important; }
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+.input-container input {
+  background: #3c3c3c;
+  border: 1px solid #007acc;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 4px;
+  outline: none;
+}

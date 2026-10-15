@@ -1,0 +1,47 @@
+<div class="multi-step-container">
+  <!-- Progress Tracker -->
+  <div class="progress-bar">Step {{ currentStep }} of {{ totalSteps }}</div>
+
+  <form [formGroup]="masterForm" (ngSubmit)="onSubmit()">
+
+    <!-- STEP 1: Personal Details -->
+    <div *ngIf="currentStep === 1" formGroupName="personalDetails">
+      <h3>Personal Details</h3>
+      <label>First Name</label>
+      <input formControlName="firstName" type="text" />
+      <div *ngIf="personalGroup.get('firstName')?.touched && personalGroup.get('firstName')?.invalid" class="error">
+        First name is required.
+      </div>
+
+      <label>Last Name</label>
+      <input formControlName="lastName" type="text" />
+      
+      <button type="button" (click)="nextStep()" [disabled]="!personalGroup.valid">Next</button>
+    </div>
+
+    <!-- STEP 2: Contact Details -->
+    <div *ngIf="currentStep === 2" formGroupName="contactDetails">
+      <h3>Contact Details</h3>
+      <label>Email</label>
+      <input formControlName="email" type="email" />
+
+      <label>Phone</label>
+      <input formControlName="phone" type="text" />
+
+      <button type="button" (click)="prevStep()">Back</button>
+      <button type="button" (click)="nextStep()" [disabled]="!contactGroup.valid">Next</button>
+    </div>
+
+    <!-- STEP 3: Account Details & Submit -->
+    <div *ngIf="currentStep === 3" formGroupName="accountDetails">
+      <h3>Account Setup</h3>
+      <label>Password</label>
+      <input formControlName="password" type="password" />
+
+      <button type="button" (click)="prevStep()">Back</button>
+      <!-- Only the final button is type="submit" -->
+      <button type="submit" [disabled]="!masterForm.valid">Submit Form</button>
+    </div>
+
+  </form>
+</div>

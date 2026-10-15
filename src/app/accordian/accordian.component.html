@@ -1,12 +1,9 @@
-<div class="accordion-item" *ngFor="let item of items;let i=index">
-    <button class="accordion-header" (click)="onToggle(i)">
-        <span class="accordion-header">{{item.title}}</span>
-        <span class="icon">{{ currentIndex===i ? '-' : '+' }}</span>
+<div class="accordian-item" *ngFor="let item of items;let i=index">
+    <button class="accordian-header" (click)="onToggle(i)">
+        <span class="accordian-title"> {{item.title}}</span>
+        <span class="accordian-button">{{currentIndex==i ? "-" : "+"}}</span>
     </button>
-    <div class="accordian-content" *ngIf="currentIndex===i">
+    <div class="accordian-content" *ngIf="currentIndex==i">
         {{item.content}}
     </div>
-
-
-
 </div>
