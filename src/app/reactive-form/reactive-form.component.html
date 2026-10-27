@@ -1,0 +1,12 @@
+<form  class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="input-text"> <input type="text" name="firstName" formControlName="firstName"/> First Name</div>
+    <div class="input-text"><input type="text" name="lastName" formControlName="lastName"/>Last Name</div>
+    <div class="input-text"><input type="text" name="email" formControlName="email"/>Email</div>
+    <div class="input-text"><input type="number" name="contact" formControlName="contact"/>Contact</div>
+    <div  formGroupName="addres">
+        <div class="input-text"><input type="text" name="area" formControlName="area"/>Area</div>
+        <div class="input-text"><input type="text" name="city" formControlName="city"/>City</div>
+        <span style="cursor: pointer;" (click)="addFiels()">+</span>
+    </div>
+    <button type="submit"> Submit</button>
+</form>

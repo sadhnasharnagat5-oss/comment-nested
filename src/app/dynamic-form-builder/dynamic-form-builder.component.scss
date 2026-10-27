@@ -1,0 +1,14 @@
+/* Enable flexbox on the form element */
+.ordered-form-container {
+  display: flex;
+  flex-direction: column;
+//   gap: 1.25rem; /* Replaces manual margins for uniform spacing */
+}
+
+/* Force each individual wrapper to behave as a flex item */
+.form-field-wrapper {
+  display: block; 
+  width: 100%;
+}
+
+/* Fix nested group sections so their child items can reorder */

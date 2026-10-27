@@ -1,1 +1,60 @@
-<p>dynamic-form-builder works!</p>
+<div class="form-container" *ngIf="form">
+  <h2>CSS-Ordered Dynamic Form</h2>
+  
+  <!-- 1. The form wrapper must have display: flex or display: grid for CSS order to work -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="ordered-form-container">
+    
+    <!-- 2. Loop through the original schema directly without any sorting functions -->
+    <div *ngFor="let field of myFormSchema" 
+         class="form-field-wrapper" 
+         [style.order]="field.order"> <!-- 👈 Direct CSS order layout mapping -->
+
+      <!-- NESTED FORM GROUPS -->
+      <div *ngIf="field.type === 'group' && field.children" 
+           [formGroup]="asFormGroup(form.get(field.key))" 
+           class="form-group-section nested-ordered-container">
+        
+        <h3>{{ field.label }}</h3>
+        
+        <!-- 3. Apply the same style.order trick to child elements inside the group -->
+        <div *ngFor="let child of field.children" 
+             class="child-field-wrapper"
+             [style.order]="child.order"> <!-- 👈 Child layout mapping -->
+          <label [for]="child.key">
+            {{ child.label }} <span *ngIf="child.required" style="color: red;">*</span>
+          </label>
+          <input [id]="child.key" 
+                 [type]="child.type" 
+                 [placeholder]="child.placeholder || ''" 
+                 [formControlName]="child.key" 
+                 class="form-input" />
+        </div>
+
+      </div>
+
+      <!-- STANDARD TOP-LEVEL CONTROLS -->
+      <div *ngIf="field.type !== 'group' && field.type !== 'button' && field.type !== 'submit'" class="input-control-block">
+        <label [for]="field.key">
+          {{ field.label }} <span *ngIf="field.required" style="color: red;">*</span>
+        </label>
+        <input [id]="field.key" 
+               [type]="field.type" 
+               [placeholder]="field.placeholder || ''" 
+               [formControlName]="field.key" 
+               class="form-input" />
+      </div>
+
+      <!-- ACTION AND SUBMIT BUTTONS -->
+      <div *ngIf="field.type === 'button' || field.type === 'submit'" class="button-control-block">
+        <button *ngIf="field.type === 'button'" type="button" (click)="onDynamicButtonClick(field.key)" class="btn btn-action">
+          {{ field.label }}
+        </button>
+        <button *ngIf="field.type === 'submit'" type="submit" [disabled]="form.invalid" class="btn btn-submit">
+          {{ field.label }}
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+</div>

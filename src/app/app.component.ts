@@ -9,6 +9,8 @@ import {
   switchMap,
   catchError,
   shareReplay,
+  concatMap,
+  retry,
 } from 'rxjs/operators';
 import { forkJoin, Observable, of } from 'rxjs';
 import { error } from 'console';
@@ -17,7 +19,9 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { AccordianComponent } from './accordian/accordian.component';
 import { MultistepFormComponent } from './multistep-form/multistep-form.component';
 import { FileExplorerComponent } from './file-explorer/file-explorer.component';
-
+import { AdvanceTableComponent } from './advance-table/advance-table.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { DynamicFormBuilderComponent } from './dynamic-form-builder/dynamic-form-builder.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,7 +32,10 @@ import { FileExplorerComponent } from './file-explorer/file-explorer.component';
     PaginationComponent,
     AccordianComponent,
     MultistepFormComponent,
-    FileExplorerComponent
+    FileExplorerComponent,
+    AdvanceTableComponent,
+    ReactiveFormComponent,
+    DynamicFormBuilderComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -58,7 +65,7 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    // this.getPagination('');
+    // this.getApiDependent()
   }
 
   searchMemo(searchValue: any) {
@@ -80,4 +87,39 @@ export class AppComponent implements OnInit {
       console.log(data);
     });
   }
+ getApiDependent() {
+  this.userService.getUser().pipe(
+    switchMap((userVal: any) => {
+      
+      // Using userVal[0] from your original code in case userVal is an array
+      const userId = Array.isArray(userVal) ? userVal[0] : userVal; 
+      return this.userService.getPost(userId);
+    }),
+    switchMap((posts: any) => {
+
+      if (!posts || !Array.isArray(posts) || posts.length === 0) {
+        console.warn('Warning: Posts is empty or not an array!');
+        return of([]); // Emits an empty array safely without breaking
+      }
+
+      const commentObservables = posts.map((post:any,i:any)=>{
+        return this.userService.getComment(post).pipe(map(val=>{
+          let key= "post" + i;
+          return {[key]:post}
+        }))
+      })
+
+      return forkJoin(commentObservables);
+    })
+  ).subscribe({
+    next: (res) => {
+      console.log('4. Final Combined Result:', res); 
+    },
+    error: (err) => {
+      console.error('API Chain Error occurred:', err);
+    }
+  });
+}
+
+
 }

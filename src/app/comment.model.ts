@@ -6,6 +6,6 @@ export interface Comment {
 }
 
 export interface ReplyPayload {
-  parentId: string;  // The ID of the comment being replied to
-  text: string;      // The content of the reply
+  parentId: string;  
+  text: string;     
 }
